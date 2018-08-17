@@ -9,7 +9,8 @@ Scopus database using scopus, you need an API key which you can get from [here](
 
 ## Installing
 
-`install scopus' 
-	$ pip install scopus
+`install scopus`
+	 
+	 $ pip install scopus
 	
 For information on alternate installs read the documentation at the [website](https://scopus.readthedocs.io/en/latest)
