@@ -16,4 +16,4 @@ def save_excel(df, filename, sheetname):
     df.to_excel(writer,sheetname, index=False, encoding='utf-8')
     writer.save()
     
-    return print("Your Excel file is ready!")
+    return "Your Excel file is ready!"
