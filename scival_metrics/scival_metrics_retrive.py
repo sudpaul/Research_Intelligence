@@ -5,7 +5,7 @@ Created on Mon Jul 30 14:26:00 2018
 @author: z3525552
 """
 
-def scival_metrics(scopus_id):
+def scival_metrics(filepath, scopus_id):
     
     """Retriving SciVal default metrics using Scival API 
     it takes API file in order to get api key and scopus_id for which 
@@ -13,6 +13,7 @@ def scival_metrics(scopus_id):
     
     import requests
     import pandas as pd
+    from elsiver_api_retrive import get_elseiver_API
     pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
     assert isinstance(scopus_id, (str, int))
@@ -26,7 +27,7 @@ def scival_metrics(scopus_id):
 		        'yearRange': '5yrsAndCurrent',
             'authors': '%s' %(scopus_id) }  
     
-    token = 'cf19ff27ef3c0d95f93c26947eb6533f'
+    token = token = get_elseiver_API(filepath)
     header = {'Accept':'application/json', 'X-ELS-APIKey': token}
 
     try:
