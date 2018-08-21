@@ -14,6 +14,7 @@ def scopus_author(scopus_id):
     
     from scopus import ScopusAuthor
     
+    # Retrive autor object from SCOPUS database
     author = ScopusAuthor(scopus_id)
     
     return author
@@ -32,16 +33,17 @@ def make_dataframe(authors_scopus_ids):
    import pandas as pd
    from collections import defaultdict
    
+   #Default dictionary of Scopus ID for author attributes lookup
    scopus_id = defaultdict(list)
   
    
    for author in authors_scopus_ids:
        
        scopus_id['SCOPUS_ID'].append(author)
-       
+       #Retriving author from SCOPUS
        au = scopus_author(author)    
        name = au.firstname +' ' + au.lastname
-       
+       #Retriving attributies from author 
        scopus_id['name'].append(name)
        scopus_id['h_index'].append(au.hindex)
        scopus_id['documents_total'].append(au.ndocuments)
@@ -51,7 +53,7 @@ def make_dataframe(authors_scopus_ids):
       
        
        scopus_id['orcid'].append(au.orcid)
-       
+   #Making dataframe for further analysis    
    df = pd.DataFrame.from_dict(scopus_id)
    
    return df
