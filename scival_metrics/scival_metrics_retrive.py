@@ -18,8 +18,10 @@ def scival_metrics(filepath, scopus_id):
 
     assert isinstance(scopus_id, (str, int))
     
+    #SciVal base URL for author metrics retrive
     base_url = "http://api.elsevier.com/analytics/scival/author/metrics?"
     
+    #query for http request
     query = {'metricTypes': """ScholarlyOutput,CitationCount,hIndices,
              FieldWeightedCitationImpact,CitationsPerPublication,
 		         OutputsInTopCitationPercentiles,PublicationsInTopJournalPercentiles""",
@@ -32,15 +34,17 @@ def scival_metrics(filepath, scopus_id):
 
     try:
         response = requests.get(url=base_url, params=query,headers= header)
-        
+        #http request response object for status code
         if not response.status_code == 200:
         
             return response.status_code
         
         else:
-            
+            #Respose json data
             response_data = response.json()    
             data = response_data['results'][0]['metrics']
+            
+            #Making a pandas dataframe from data dictionary
             df = pd.DataFrame.from_records(data)
     
             result = df[['metricType', 'value']]
