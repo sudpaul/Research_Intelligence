@@ -10,51 +10,38 @@ Created on Fri Jul 27 15:17:54 2018
 
 
 
-def get_scival_fwci(file, author_id):
+def get_scival_fwci(author_id):
     
     
     ''' This function is used for retriving SciVal matric Field weighted 
-        citiations pact. It takes elseiver API file and author id(SCOPUS_ID) as
-        inputs and return mean FWCI of 5 years and current year 
-        exclude selfcitations journal impact SNIP. 
-        
-        Valid HTTP requestes code other than 200 return the 
-        status codes.If http requests fail return 0''' 
-    
-    import requests
+        inpus is author id(SCOPUS_ID).Return mean FWCI.''' 
+
     import pandas as pd
-    from elsiver_api_retrive import get_elseiver_API
+    from scival_author_metrics import api_query  
     
     assert type(author_id) is str
+    #FWCI for last years and 5 years and current year exclude selfcitations and journal impact type SNIP
+    query = {'metricTypes':'FieldWeightedCitationImpact',
+             'yearRange' : '5yrsAndCurrent',
+             'includeSelfCitations':'false',
+             'byYear':'true',
+             'includedDocs':'AllPublicationTypes',
+             'journalImpactType':'SNIP',
+             'showAsFieldWeighted':'false',
+             'indexType':'hIndex',
+              'authors':'%s' %(author_id)}
+   
+    #HTTP response object from request       
+    response = api_query(query)
+    data = response['results'][0]['metrics'][0]   
     
-    API = get_elseiver_API(file)
-    
-    base_url ='http://api.elsevier.com/analytics/scival/author/metrics?'
-    query = 'metricTypes=FieldWeightedCitationImpact&yearRange=5yrsAndCurrent&includeSelfCitations=false&byYear=true&includedDocs=AllPublicationTypes&journalImpactType=SNIP&showAsFieldWeighted=false&indexType=hIndex&authors=%s' %(author_id)
-    
-    url = base_url + query
-    
-    header = {'Accept':'application/json', 'X-ELS-APIKey': API}
-    
-    try:
-        response = requests.get(url, headers=header)
-        if not response.status_code == 200:
+    #Dataframe from the data dictionary and calculating mean from the values      
+    fwci = pd.DataFrame.from_dict(data)
+    fwci = fwci.drop(['metricType'], axis=1)    
+    mean_fwci = fwci.mean()        
             
-            return response.status_code
-        else:
-       
-            response_data = response.json()       
-            data = response_data['results'][0]['metrics'][0]   
-            
-            fwci = pd.DataFrame.from_dict(data)
-    
-            fwci = fwci.drop(['metricType'], axis=1)    
-            average_fwci = fwci['valueByYear'].mean()
-            
-            return average_fwci
-        
-    except:
-          return 0
+    return mean_fwci
+ 
            
     
     
