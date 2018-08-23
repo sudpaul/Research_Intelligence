@@ -8,7 +8,15 @@ Created on Mon Jul 30 09:35:35 2018
 def scopus_author(scopus_id):
     
     '''Helper function to invoke the Scopus Author from SCOPUS database
-     download the author contenets and retrun author object'''
+     download the author contenets and retrun author object
+    
+    Parameter
+    ----------
+    scopus_id : str or int
+    
+    Return
+    ----------
+    author : Scopus Author object'''
     
     assert isinstance(scopus_id, (str, int))
     
@@ -26,7 +34,15 @@ def make_dataframe(authors_scopus_ids):
    '''Input is list/tuple of author scopus id 
      get name, h-index, total documents and other attributes from 
      SCOPUS author object return a pandas dataframe.
-     The attributes are as columns of the dataframe'''
+     The attributes are as columns of the dataframe
+     
+    Parameter
+    ----------
+    scopus_ids : list or tuple 
+    
+    Return
+    ----------
+    df : Pandas dataframe'''  
     
    assert isinstance(authors_scopus_ids,(list, tuple)) 
     
