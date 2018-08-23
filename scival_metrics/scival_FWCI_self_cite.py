@@ -9,8 +9,8 @@ def get_scival_fwci_selfcite(author_id):
     
     
     ''' This function is used for retriving SciVal matric Field weighted 
-        citiations impact. It takes elseiver API file and author id(SCOPUS_ID) 
-        as inputs. Return FWCI of the author including selfcitations and 
+        citiations impact. Input author id(SCOPUS_ID) 
+        return FWCI of the author including selfcitations and 
         journal impact type CiteScore. '''
         
     
@@ -18,10 +18,15 @@ def get_scival_fwci_selfcite(author_id):
         
     assert type(author_id) is str
     
-    query = '''metricTypes=FieldWeightedCitationImpact&yearRange=5yrsAndCurrent
-    &includeSelfCitations=true&byYear=false&includedDocs=AllPublicationTypes&
-    journalImpactType=CiteScore&showAsFieldWeighted=true&indexType=hIndex&
-    authors=%s' %(author_id)'''
+    query = {'metricTypes' :'FieldWeightedCitationImpact',
+             'yearRange' : '5yrsAndCurrent',
+             'includeSelfCitations':'true',
+             'byYear':'false',
+             'includedDocs':'AllPublicationTypes',
+             'journalImpactType':'CiteScore',
+             'showAsFieldWeighted':'true',
+             'indexType':'hIndex',
+             'authors': '%s' %(author_id)}
     
     #HTTP request response object        
     response = api_query(query)      
