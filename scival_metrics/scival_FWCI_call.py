@@ -5,17 +5,24 @@ Created on Fri Jul 27 15:17:54 2018
 @author: z3525552
 """
 
-
-""" Retriving the Field Weighted Citation Impact from SciVal API"""
-
-
-
 def get_scival_fwci(author_id):
     
+    ''' This function is used for retriving SciVal 
+        Field weighted citation impact exclude selfcitations
+        input is author id (SCOPUS_ID).
+        Return mean FWCI.
+        
+    Parameter
+    ----------
+    author_id : str or int
+                Author Scopus Id 
     
-    ''' This function is used for retriving SciVal matric Field weighted 
-        inpus is author id(SCOPUS_ID).Return mean FWCI.''' 
-
+    Return
+    -------
+    mean_fwci : float   
+                mean FWCI for 5 years and current
+    ''' 
+               
     import pandas as pd
     from scival_author_metrics import api_query  
     
