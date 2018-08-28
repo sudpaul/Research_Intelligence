@@ -9,10 +9,10 @@ def api_query(query):
     
     
     import requests
-    from elsiver_api_retrive import get_elseiver_API
+    from elseiver_api_retrive import get_elseiver_API
     
     
-    key = get_elseiver_API()
+    key = get_elseiver_API('../elsevier_developer')
     
     base_url ='http://api.elsevier.com/analytics/scival/author/metrics?'
     
