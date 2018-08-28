@@ -8,9 +8,19 @@ Created on Mon Jul 30 14:26:00 2018
 def scival_metrics(scopus_id):
     
     """Retriving SciVal default metrics using Scival API 
-    input scopus_id for which 
-    return all default metrics displayed in Scival """
+    input scopus_id for which  return all default metrics 
+    displayed in Scival.https://www.scival.com/overview/summary
     
+    Parameter
+    ----------
+    scopus_id : str
+               Author Scopus id
+    
+    Returns
+    -------
+    metrics : obj
+              pandas dataframe metricType as index
+              value as column"""
     
     import pandas as pd
     from scival_author_metrics import api_query
@@ -18,7 +28,6 @@ def scival_metrics(scopus_id):
 
     assert isinstance(scopus_id, (str, int))
     
-        
     #query for http request
     query = {'metricTypes': """ScholarlyOutput,CitationCount,hIndices,
              FieldWeightedCitationImpact,CitationsPerPublication,
