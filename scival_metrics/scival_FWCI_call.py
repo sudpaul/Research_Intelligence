@@ -26,7 +26,7 @@ def get_scival_fwci(author_id):
     import pandas as pd
     from scival_author_metrics import api_query  
     
-    assert type(author_id) is str
+    assert isinstance(author_id, (str, int))
     #FWCI for last years and 5 years and current year exclude selfcitations and journal impact type SNIP
     query = {'metricTypes':'FieldWeightedCitationImpact',
              'yearRange' : '5yrsAndCurrent',
