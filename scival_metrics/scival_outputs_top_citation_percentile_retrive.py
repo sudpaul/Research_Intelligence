@@ -7,17 +7,27 @@ Created on Wed Aug  8 10:04:53 2018
 
 def scival_top_citation_percentiles_retrive(author_id):
     
-    ''' This function is used for SciVal matric outputs in top 
-        percentile retrive. It takes API file, author id(SCOPUS_ID) as inputs 
-        and return 10th percentile pulications results as list. '''
+    ''' This function retrive SciVal matric outputs in top 
+        percentile. Input is author id(SCOPUS_ID) 
+        and return output in top 10th percentile cited. 
+        
+    Parameter
+    ----------
+    author_id : str or int
+                Author Scopus Id 
     
+    Return
+    -------
+    percentile : float   
+                 Top 10th percentile cited
+    ''' 
+ 
     import pandas as pd
     from scival_author_metrics import api_query
     pd.options.display.float_format = '{:.2f}'.format
     
-    
-    assert type(author_id) is str
-    
+    assert  isinstance(author_id, (str, int))
+        
     query = {'metricTypes': 'OutputsInTopCitationPercentiles',
              'showAsFieldWeighted': 'true',
              'byYear': 'false',
