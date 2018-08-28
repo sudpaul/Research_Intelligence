@@ -8,15 +8,26 @@ Created on Thu Aug  2 11:17:46 2018
 
 def scival_SJR_percentile_retrive(author_id):
     
-    ''' This function is used for SciVal matric SJR percentile retrive
-        It takes API file, author id(SCOPUS_ID) as inputs and return
-        ten percentile pulications in SJR journal.''' 
+    ''' This function retrives SciVal matric SJR top ten percentile.
+        input is author id(SCOPUS_ID) and return ten percentile 
+        exclude selfcitations pulications in SJR journal.
+        
+    Parameter
+    ----------
+    author_id : str or int
+                Author Scopus Id 
     
+    Return
+    -------
+    top_10_percentile : float   
+                ten percentile publication in SJR journal
+    ''' 
+        
     import pandas as pd
     from scival_author_metrics import api_query
     pd.options.display.float_format = '{:.2f}'.format
  
-    assert type(author_id) is str
+    assert  isinstance(author_id, (str, int))
     
     query ={'metricTypes':'PublicationsInTopJournalPercentiles',
             'yearRange':'5yrs',
