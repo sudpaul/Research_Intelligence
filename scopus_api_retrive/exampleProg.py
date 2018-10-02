@@ -25,6 +25,7 @@ client = ElsClient(config['apikey'])
 
 ## Author example
 # Initialize author with uri
+#UNSW Internal Medicine Staff
 my_auth = ElsAuthor(
         uri = 'https://api.elsevier.com/content/author/author_id/15769145500')
 # Read author data, then write to disk
@@ -36,7 +37,8 @@ else:
 
 ## Affiliation example
 # Initialize affiliation with ID as string
-my_aff = ElsAffil(affil_id = '60028333')
+##UNSW Medicine Affilication Id
+my_aff = ElsAffil(affil_id = '60011463')
 if my_aff.read(client):
     print ("my_aff.name: ", my_aff.name)
     my_aff.write()
@@ -45,7 +47,7 @@ else:
 
 ## Scopus (Abtract) document example
 # Initialize document with Scopus ID.
-scp_doc = AbsDoc(scp_id = '84872135457')
+scp_doc = AbsDoc(scp_id = '2-s2.0-77951629119')
 if scp_doc.read(client):
     print ("scp_doc.title: ", scp_doc.title)
     scp_doc.write()   
@@ -61,7 +63,8 @@ else:
     print ("Read document failed.")
 
 ## ScienceDirect (full-text) document example using DOI
-doi_doc = FullDoc(doi = '10.1016/j.gaitpost.2012.06.024')
+#UNSW Paper  (The extent and correlates of community-based pharmaceutical opioid utilisation in Australia)   
+doi_doc = FullDoc(doi = '10.5694/mja15.00671')
 if doi_doc.read(client):
     print ("doi_doc.title: ", doi_doc.title)
     doi_doc.write()   
