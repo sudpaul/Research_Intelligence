@@ -6,6 +6,21 @@ Created on Tue Oct  2 10:51:59 2018
 """
 def author_subject_area(SCOPUS_IDs):
     
+    """The function is to retrive bulk subject categories of SCOPUS author. 
+    Then custom mapped to specific keywords for futher data analysis.
+    
+    Parameter
+    ----------
+    scopus_ids : list or tuple
+                number of SCOPUS author id for mapping
+    Return
+    ----------
+    df : obj
+         pandas dataframe object """
+    
+    assert isinstance(SCOPUS_IDs, (str, int))
+
+    
     import pandas as pd
     from scopus_authors_retrive import scopus_author
     from collections import defaultdict
