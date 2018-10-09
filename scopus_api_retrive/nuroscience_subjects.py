@@ -1,4 +1,4 @@
-__# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Created on Tue Oct  9 11:01:27 2018
 
@@ -28,12 +28,13 @@ def nuroscience_theme(subjects):
                    'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
                    'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'}}
                                                       
-    
+    #collection of subject categories of author mapped to author subject set      
+    author_subjects = set(subjects)
+    #Validation for theme subjects and author main subjects is not a disjoint set
+    if not data['NHMA'].isdisjoint(author_subjects):       
+        #If there is intersection of the two sets, result will be the intersection set.
+        result =  data['NHMA'].intersection(author_subjects)
         
-    theme_subject = set(subjects)
-    
-    if not data['NHMA'].isdisjoint(theme_subject):       
-        result =  data['NHMA'].intersection(theme_subject)
         return 'NHMA', result
     else :
         return 'All/Any theme', None
