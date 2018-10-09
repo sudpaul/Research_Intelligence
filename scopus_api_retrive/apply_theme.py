@@ -66,7 +66,7 @@ def main_theme(subjects):
     """               
     #Subject heading of SCOPUS is theme data dictionary. 
     #Lookup table for set intersection
-    d = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'} ,
+    data = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'} ,
          'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
              'Rheumatology', 'Toxicology'},
@@ -80,12 +80,12 @@ def main_theme(subjects):
     alternatives = subjects[5:] 
     #Five main subjects of researchers publications
     #Authhor main subjects set 
-    theme_subject = set(main_subject)
+    author_subjects = set(main_subject)
     #Validation for theme subjects and author main subjects is not a disjoint set
-    theme = check_theme(theme_subject) 
+    theme = check_theme(author_subjects) 
     #If there is intersection of the two sets, result will be the intersection set.
     if theme:       
-        result =  d[theme].intersection(theme_subject)
+        result =  data[theme].intersection(author_subjects)
         return theme, result
     #Otherwise researcher is All/Any theme
     else:
