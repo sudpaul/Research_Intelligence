@@ -24,9 +24,11 @@ def check_theme(theme_subject):
     
     cancer = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'}
 
-    triple_I = { 'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
-             'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
-             'Rheumatology', 'Toxicology'}
+    triple_I = { 'Endocrinology','General Immunology and Microbiology',
+                'Immunology and Microbiology (miscellaneous)','Immunology', 'Microbiology',
+             'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Immunology and Allergy',
+             'Infectious Diseases', 'Microbiology (medical)','Rheumatology', 'Toxicology'}
+    
     ncd = {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
            'Endocrinology, Diabetes and Metabolism',
             'Pulmonary and Respiratory Medicine'}
