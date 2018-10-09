@@ -20,7 +20,7 @@ def check_theme(theme_subject):
            
     nomatch : None """ 
     
-    
+    #Subject heading of SCOPUS is theme data dictionary
     
     cancer = {'Cancer Research','Oncology', 'Cancer', 'Radiation'}
 
@@ -29,7 +29,8 @@ def check_theme(theme_subject):
              'Rheumatology', 'Toxicology'}
     NCD = {'Cardiology', 'Cardiovascular Medicine', 'Endocrinology', 'Diabetes and Metabolism',
             'Pulmonary and Respiratory Medicine'}
-
+    #Theme subject and SCOPUS subject heading is a disjoint set then no mapping 
+    #otherwise return matching theme 
     
     if not cancer.isdisjoint(theme_subject):
            return 'Cancer'
@@ -60,6 +61,8 @@ def main_theme(subjects):
                     All/Any theme 
                    default mapping if no mactch is found
     """               
+    #Subject heading of SCOPUS is theme data dictionary. 
+    #Lookup table for set intersection
     d = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation'} ,
          'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
@@ -67,15 +70,19 @@ def main_theme(subjects):
         'NCD' : {'Cardiology', 'Cardiovascular Medicine', 'Endocrinology', 'Diabetes and Metabolism'
             'Pulmonary and Respiratory Medicine'}}
                                                       
-    
+    #Five main subjects of researchers publications
     main_subject = subjects[:5]
+    #Placeholders for alternatives theme mapping
     alternatives = subjects[5:] 
-    
+    #Five main subjects of researchers publications
+    #Authhor main subjects set 
     theme_subject = set(main_subject)
+    #Validation for theme subjects and author main subjects is not a disjoint set
     theme = check_theme(theme_subject) 
-    
+    #If there is intersection of the two sets, result will be the intersection set.
     if theme:       
         result =  d[theme].intersection(theme_subject)
         return theme, result
+    #Otherwise researcher is All/Any theme
     else:
         return "All/Any theme", None
