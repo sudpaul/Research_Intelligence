@@ -48,4 +48,4 @@ def main_theme(subjects):
         result =  d[theme].intersection(theme_subject)
         return theme, result
     else:
-        return "All/Any theme", None
+        return "All/Any theme", 
