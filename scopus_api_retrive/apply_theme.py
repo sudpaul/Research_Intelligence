@@ -22,12 +22,13 @@ def check_theme(theme_subject):
     
     #Subject heading of SCOPUS is theme data dictionary
     
-    cancer = {'Cancer Research','Oncology', 'Cancer', 'Radiation'}
+    cancer = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'}
 
-    Triple_I = { 'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
+    triple_I = { 'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
              'Rheumatology', 'Toxicology'}
-    NCD = {'Cardiology', 'Cardiovascular Medicine', 'Endocrinology', 'Diabetes and Metabolism',
+    ncd = {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
+           'Endocrinology, Diabetes and Metabolism',
             'Pulmonary and Respiratory Medicine'}
     #Theme subject and SCOPUS subject heading is a disjoint set then no mapping 
     #otherwise return matching theme 
@@ -35,10 +36,10 @@ def check_theme(theme_subject):
     if not cancer.isdisjoint(theme_subject):
            return 'Cancer'
     
-    elif not Triple_I.isdisjoint(theme_subject):   
+    elif not triple_I.isdisjoint(theme_subject):   
 
           return 'Triple I'
-    elif not NCD.isdisjoint(theme_subject):   
+    elif not ncd.isdisjoint(theme_subject):   
 
           return 'NCD'
     else:
@@ -63,11 +64,12 @@ def main_theme(subjects):
     """               
     #Subject heading of SCOPUS is theme data dictionary. 
     #Lookup table for set intersection
-    d = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation'} ,
+    d = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'} ,
          'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
              'Rheumatology', 'Toxicology'},
-        'NCD' : {'Cardiology', 'Cardiovascular Medicine', 'Endocrinology', 'Diabetes and Metabolism'
+        'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
+           'Endocrinology, Diabetes and Metabolism',
             'Pulmonary and Respiratory Medicine'}}
                                                       
     #Five main subjects of researchers publications
