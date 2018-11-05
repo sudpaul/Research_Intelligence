@@ -18,7 +18,7 @@ def author_subject_area(SCOPUS_IDs):
     df : obj
          pandas dataframe object """
     
-    assert isinstance(SCOPUS_IDs, (str, int))
+    assert isinstance(SCOPUS_IDs, (list, tuple))
 
     
     import pandas as pd
