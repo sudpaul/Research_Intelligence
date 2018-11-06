@@ -22,28 +22,26 @@ def check_theme(theme_subject):
     
     #Subject heading of SCOPUS is theme data dictionary
     
-    cancer = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'}
-
-    triple_I = { 'Endocrinology','General Immunology and Microbiology',
+    
+    data = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'}, 
+            'Triple I' : { 'Endocrinology','General Immunology and Microbiology',
                 'Immunology and Microbiology (miscellaneous)','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Immunology and Allergy',
-             'Infectious Diseases', 'Microbiology (medical)','Rheumatology', 'Toxicology'}
-    
-    ncd = {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
+             'Infectious Diseases', 'Microbiology (medical)','Rheumatology', 'Toxicology'},
+             'NHMA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
+                   'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
+                   'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
+                   'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
+                   'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'},                                                    
+           'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
            'Endocrinology, Diabetes and Metabolism',
-            'Pulmonary and Respiratory Medicine'}
+            'Pulmonary and Respiratory Medicine'}}
     #Theme subject and SCOPUS subject heading is a disjoint set then no mapping 
     #otherwise return matching theme 
     
-    if not cancer.isdisjoint(theme_subject):
-           return 'Cancer'
-    
-    elif not triple_I.isdisjoint(theme_subject):   
-
-          return 'Triple I'
-    elif not ncd.isdisjoint(theme_subject):   
-
-          return 'NCD'
+    for key in data:
+        if not data[key].isdisjoint(theme_subject):
+               return key
     else:
         return None
 
@@ -70,6 +68,11 @@ def main_theme(subjects):
          'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
              'Rheumatology', 'Toxicology'},
+         'NHMA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
+                   'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
+                   'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
+                   'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
+                   'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'},
         'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
            'Endocrinology, Diabetes and Metabolism',
             'Pulmonary and Respiratory Medicine'}}
