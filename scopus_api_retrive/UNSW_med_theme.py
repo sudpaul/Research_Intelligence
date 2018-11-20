@@ -4,7 +4,27 @@ Created on Wed Nov 14 09:14:07 2018
 
 @author: z3525552
 """
-
+def scopus_author(scopus_id):
+    
+    '''Helper function to invoke the Scopus Author from SCOPUS database
+     download the author contenets and retrun author object
+    
+    Parameter
+    ----------
+    scopus_id : str or int
+    
+    Return
+    ----------
+    author : Scopus Author object'''
+    
+    assert isinstance(scopus_id, (str, int))
+    
+    from scopus import ScopusAuthor
+    
+    # Retrive autor object from SCOPUS database
+    author = ScopusAuthor(scopus_id)
+    
+    return author
 
 
 def check_theme(subjects):
