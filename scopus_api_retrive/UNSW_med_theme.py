@@ -74,11 +74,20 @@ def check_theme(subjects):
    
     theme_subjects = {key:value for key, value in subjects.items() if key in data_set}
     
-    for theme, match in theme_dict.items():
-        for subject in theme_subjects:
-            if subject in match:
-               result[theme] += theme_subjects[subject]
-
-    return theme_subjects, result 
-            
-
+    if theme_subjects:
+        for theme, match in theme_dict.items():
+            for subject in theme_subjects:
+               if subject in match:
+                  result[theme] += theme_subjects[subject]
+        return theme_subjects, result 
+    else:
+        return subjects, 'All/Any theme'        
+    
+def theme_key(result):
+    
+    if result!= 'All/Any theme' or len(result)>0 :
+        theme1 = max(result, key=lambda k: result[k]) 
+        alternative = {k:v for k, v in result.items() if k not in theme1}
+        return theme1, alternative
+    else:
+        return 'All/Any theme', None
