@@ -71,9 +71,9 @@ def check_theme(subjects):
                    'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'},
                    'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
                         'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine'}}    
-   
+    #Filter the author publication subjects ASJC codes to UNSW med theme ASJC listed codes
     theme_subjects = {key:value for key, value in subjects.items() if key in data_set}
-    
+    #If ASJC codes are matched then mapped to the data dictionary of theme Subjects
     if theme_subjects:
         for theme, match in theme_dict.items():
             for subject in theme_subjects:
@@ -97,8 +97,9 @@ def theme_key(result):
            
     alternative : dict 
              ASJC codes categories which are not mapped to theme
-      
     """
+    #The largest publications number mapped to the main them and subset 
+    #of publication is return for further analysis
     if result:
         theme1 = max(result, key=lambda k: result[k]) 
         alternative = {k:v for k, v in result.items() if k not in theme1}
