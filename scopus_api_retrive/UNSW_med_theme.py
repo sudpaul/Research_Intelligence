@@ -105,3 +105,33 @@ def theme_key(result):
         return theme1, alternative
     else:
         return 'All/Any theme', None
+
+def author_subject_area(SCOPUS_IDs):
+    
+    import pandas as pd
+    from collections import defaultdict
+    
+    scopus_id = defaultdict(list)
+  
+    for author in SCOPUS_IDs:
+        scopus_id['SCOPUS_ID'].append(author)
+       #Retriving author from SCOPUS
+        au = scopus_author(author)
+        subjects = dict(au.categories)
+        research_area, result = check_theme(subjects)
+        scopus_id['Name'].append(au.name)      
+        scopus_id['Subjects_area'].append(research_area)
+        scopus_id['Result'].append(result)
+        main, secondary_area = theme_key(result)
+        if main: 
+            alternative, all_areas = theme_key(secondary_area)
+            scopus_id['Main_theme'].append(main)
+            scopus_id['Alternative_theme'].append(alternative)
+        else:
+            scopus_id['Main_theme'].append("All/Any")
+            scopus_id['Alternative_theme'].append("All_any themes")
+    ## Add columns for each 'Theme' and tranfrom subjects to match 'Theme'   
+       
+    df = pd.DataFrame.from_dict(scopus_id)
+    
+    return df
