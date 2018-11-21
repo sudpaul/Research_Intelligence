@@ -7,7 +7,7 @@ Created on Wed Nov 14 09:14:07 2018
 def scopus_author(scopus_id):
     
     '''Helper function to invoke the Scopus Author from SCOPUS database
-     download the author contenets and retrun author object
+     download the author contents and return author object
     
     Parameter
     ----------
@@ -29,8 +29,8 @@ def scopus_author(scopus_id):
 
 def check_theme(subjects):
     
-    """The fuction input is SCOPUS author subjects area and it maps to medicine
-    theme ASJC. Return the theme_subjects and map to aggregate theme result.
+    """The function input is SCOPUS author subjects area and it maps to medicine
+    theme ASJC codes. Return the theme_subjects and map to aggregate theme result.
     
     Parameters
     ----------
@@ -84,8 +84,22 @@ def check_theme(subjects):
         return subjects, 'All/Any theme'        
     
 def theme_key(result):
+    """Mapping function match the result to theme.
     
-    if result!= 'All/Any theme' or len(result)>0 :
+    Parameters
+    ----------
+    result : dict
+             ASJC codes categories of Scopus author Subject areas
+    Returns
+    ----------
+    theme1 : str
+             Mapping of ASJC codes to UNSW theme
+           
+    alternative : dict 
+             ASJC codes categories which are not mapped to theme
+      
+    """
+    if result:
         theme1 = max(result, key=lambda k: result[k]) 
         alternative = {k:v for k, v in result.items() if k not in theme1}
         return theme1, alternative
