@@ -79,7 +79,7 @@ def check_theme(subjects):
             for subject in theme_subjects:
                if subject in match:
                   result[theme] += theme_subjects[subject]
-        return theme_subjects, result 
+        return theme_subjects, dict(result) 
     else:
         return subjects, 'All/Any theme'        
     
@@ -98,7 +98,7 @@ def theme_key(result):
     alternative : dict 
              ASJC codes categories which are not mapped to theme
     """
-    #The largest publications number mapped to the main them and subset 
+    #The largest publications number mapped to the main theme and subset 
     #of publication is return for further analysis
     if result:
         theme1 = max(result, key=lambda k: result[k]) 
