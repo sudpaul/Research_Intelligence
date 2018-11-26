@@ -52,9 +52,9 @@ def api_query(query):
         resp = requests.post('https://app.dimensions.ai/api/auth.json', json=login)
         headers = {'Authorization': "JWT " + resp.json()['token'] }
         
-        if not resp.raise_for_status() == 200:
+        if not resp.status_code == 200:
             
-            return resp.raise_for_status()
+            return resp.status_code
         else:
        
             response = requests.post('https://app.dimensions.ai/api/dsl.json',
