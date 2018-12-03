@@ -117,13 +117,16 @@ def author_subject_area(SCOPUS_IDs):
     Parameter
     ----------
     scopus_ids : list or tuple 
-    
+                 Author Scopus IDs  
     Return
     ----------
-    df : Pandas dataframe''' 
+    df        : Obj
+                Pandas dataframe''' 
     
     import pandas as pd
     from collections import defaultdict
+    
+    assert isinstance(SCOPUS_IDs,(list, tuple))
     
     scopus_id = defaultdict(list)
   
