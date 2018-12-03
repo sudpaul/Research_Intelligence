@@ -109,6 +109,19 @@ def theme_key(result):
 
 def author_subject_area(SCOPUS_IDs):
     
+    '''Input is list/tuple of author scopus id 
+     get name,subject areas attributes from 
+     SCOPUS author object return a pandas dataframe.
+     The attributes are as columns of the dataframe
+     
+    Parameter
+    ----------
+    scopus_ids : list or tuple 
+    
+    Return
+    ----------
+    df : Pandas dataframe''' 
+    
     import pandas as pd
     from collections import defaultdict
     
