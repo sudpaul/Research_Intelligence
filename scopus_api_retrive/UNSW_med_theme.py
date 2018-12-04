@@ -81,7 +81,7 @@ def check_theme(subjects):
                   result[theme] += theme_subjects[subject]
         return theme_subjects, dict(result) 
     else:
-        return subjects, 'All/Any theme'        
+        return subjects, None        
     
 def theme_key(result):
     """Mapping function match the result to theme.
@@ -105,7 +105,7 @@ def theme_key(result):
         alternative = {k:v for k, v in result.items() if k not in theme1}
         return theme1, alternative
     else:
-        return 'All/Any theme', None
+        return result, None
 
 def author_subject_area(SCOPUS_IDs):
     
