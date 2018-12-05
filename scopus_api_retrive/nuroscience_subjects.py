@@ -22,7 +22,7 @@ def nuroscience_theme(subjects):
                     result is a set of string which has matched to author subject
                     All/Any theme 
                    default mapping if no mactch is found"""
-    data = {'NHMA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
+    data = {'NMHA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
                    'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
                    'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
                    'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
@@ -31,10 +31,10 @@ def nuroscience_theme(subjects):
     #collection of subject categories of author mapped to author subject set      
     author_subjects = set(subjects)
     #Validation for theme subjects and author main subjects is not a disjoint set
-    if not data['NHMA'].isdisjoint(author_subjects):       
+    if not data['NMHA'].isdisjoint(author_subjects):       
         #If there is intersection of the two sets, result will be the intersection set.
-        result =  data['NHMA'].intersection(author_subjects)
+        result =  data['NMHA'].intersection(author_subjects)
         
-        return 'NHMA', result
+        return 'NMHA', result
     else :
         return 'All/Any theme', None
