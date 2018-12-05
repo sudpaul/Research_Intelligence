@@ -14,7 +14,7 @@ def alternative_theme(alternative_subjects):
          'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
              'Rheumatology', 'Toxicology'},
-         'NHMA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
+         'NMHA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
                    'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
                    'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
                    'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
