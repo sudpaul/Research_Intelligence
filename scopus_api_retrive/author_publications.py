@@ -17,10 +17,10 @@ def author_publication(scopus_id):
     journal : obj
               pandas dataframe object         
     """
-    from scopus import ScopusAuthor
+    from scopus_authors_retrive import scopus_author
     import pandas as pd     
 
-    researcher = ScopusAuthor(6701859739)
+    researcher = scopus_author(scopus_id)
     journals = pd.DataFrame(researcher.publication_history) 
     journals.columns = ['sourcetitle','abbreviation','publication_type','issn']
 
