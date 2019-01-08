@@ -54,7 +54,7 @@ def check_theme(subjects):
             'Rheumatology', 'Toxicology', 'Clinical Neurology','Psychiatry and Mental Health', 
             'General Neuroscience', 'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
             'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
-            'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
+            'Developmental Neuroscience', 'Neurology' ,'Psychiatry Mental Health','Psychology (miscellaneous)',
             'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology',
             'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
             'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine'}
@@ -67,7 +67,7 @@ def check_theme(subjects):
                    'NMHA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
                    'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
                    'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
-                   'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
+                   'Developmental Neuroscience', 'Neurology' ,'Psychiatry Mental Health','Psychology (miscellaneous)',
                    'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'},
                    'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
                         'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine'}}    
