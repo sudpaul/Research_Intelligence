@@ -14,7 +14,8 @@ def author_publication(scopus_id):
     ----------
     scopus_id : str
                Author Scopus id
-               
+    journal : obj
+              pandas dataframe object         
     """
     from scopus import ScopusAuthor
     import pandas as pd     
