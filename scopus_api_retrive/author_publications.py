@@ -25,3 +25,16 @@ def author_publication(scopus_id):
     journals.columns = ['sourcetitle','abbreviation','publication_type','issn']
 
     return journals      
+
+
+def publication_subjects(scopus_id):
+    
+    from scopus_authors_retrive import scopus_author   
+    import pandas as pd
+    researcher = scopus_author(scopus_id)
+    
+    subjects = pd.DataFrame(data=researcher.subject_areas)
+    subjcets.columns = ['subjects','n_documents','subject_categories','asjc_codes']
+    subjects = subjects.sort_values(by=['n_documents'], ascending=False)
+    
+    return subjects
