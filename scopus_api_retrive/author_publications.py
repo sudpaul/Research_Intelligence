@@ -5,6 +5,9 @@ Created on Tue Jan  8 13:57:33 2019
 @author: z3525552
 """
 
+from scopus_authors_retrive import scopus_author   
+import pandas as pd
+
 def author_publication(scopus_id):
     
     """Retriving Journal publication detail from Scopus 
@@ -17,8 +20,7 @@ def author_publication(scopus_id):
     journal : obj
               pandas dataframe object         
     """
-    from scopus_authors_retrive import scopus_author
-    import pandas as pd     
+       
 
     researcher = scopus_author(scopus_id)
     journals = pd.DataFrame(researcher.publication_history) 
@@ -29,8 +31,6 @@ def author_publication(scopus_id):
 
 def publication_subjects(scopus_id):
     
-    from scopus_authors_retrive import scopus_author   
-    import pandas as pd
     researcher = scopus_author(scopus_id)
     
     subjects = pd.DataFrame(data=researcher.subject_areas)
