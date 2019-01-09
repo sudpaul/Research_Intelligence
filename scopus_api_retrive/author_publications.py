@@ -34,7 +34,7 @@ def publication_subjects(scopus_id):
     researcher = scopus_author(scopus_id)
     
     subjects = pd.DataFrame(data=researcher.subject_areas)
-    subjcets.columns = ['subjects','n_documents','subject_categories','asjc_codes']
+    subjects.columns = ['subjects','n_documents','subject_categories','asjc_codes']
     subjects = subjects.sort_values(by=['n_documents'], ascending=False)
     
     return subjects
