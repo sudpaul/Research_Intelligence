@@ -30,6 +30,17 @@ def author_publication(scopus_id):
 
 
 def publication_subjects(scopus_id):
+        
+    """Retriving Journal publication detail from Scopus 
+    input scopus_id for which  return publication history
+   
+    Parameter
+    ----------
+    scopus_id : str
+               Author Scopus id
+    subjects : obj
+              pandas dataframe object         
+    """
     
     researcher = scopus_author(scopus_id)
     
