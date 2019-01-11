@@ -1,3 +1,6 @@
 scopus
 pandas
 collections
+requests
+selenium
+json
