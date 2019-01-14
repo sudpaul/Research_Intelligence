@@ -12,8 +12,33 @@ def orcid_scopusid(ORCID):
         
     with open('../elsevier_developer') as f:
             token = f.read().strip()
+    """
+    Input is researher ORCID and retrive
+    scopus author id from SCOPUS author retrive
+    API. If ORCID is available in SCOPUS database
+    return author SCOPUS ID.
+    Parameters
+    ----------
+    ORCID : str
+            Researcher ORCID
     
     
+    Returns
+    -------
+    status_code : int
+                  400 : Invalid Request 
+                  401 : Authentication Error
+                  403 : Authorization/Entitlements Error
+                  405 : Invalid HTTP Method
+                  406 : Invalid Mime Type
+                  429 : Quota Exceeded
+                  500 : Generic Error
+    
+    scopus_id : str
+                author SCOPUS ID   
+    Raises: str
+            'Not Found'
+    """
         
     base_url ='https://api.elsevier.com/content/author/orcid/{orcid}'.format(orcid=ORCID)
         
