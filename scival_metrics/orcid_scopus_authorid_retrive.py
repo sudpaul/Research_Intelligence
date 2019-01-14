@@ -8,10 +8,6 @@ Created on Mon Jan 14 12:22:08 2019
 
 def orcid_scopusid(ORCID):
     
-    import requests
-        
-    with open('../elsevier_developer') as f:
-            token = f.read().strip()
     """
     Input is researher ORCID and retrive
     scopus author id from SCOPUS author retrive
@@ -39,7 +35,10 @@ def orcid_scopusid(ORCID):
     Raises: str
             'Not Found'
     """
+    import requests
         
+    with open('../elsevier_developer') as f:
+            token = f.read().strip()    
     base_url ='https://api.elsevier.com/content/author/orcid/{orcid}'.format(orcid=ORCID)
         
     header = {'Accept':'application/json', 'X-ELS-APIKey': token}
