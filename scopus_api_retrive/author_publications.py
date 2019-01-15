@@ -58,36 +58,12 @@ def get_coauthors(scopus_id):
         Note: These information will not be cached and are slow for large
         coauthor groups.
     """
-    from collections import namedtuple
+   
         # Get number of authors to search for
     res = scopus_author(scopus_id)
     data = res.get_coauthors()
         
-        # Store information in namedtuples
-    fields = 'surname given_name id areas affiliation_id name city country'
-    coauth = namedtuple('Coauthor', fields)
-    coauthors = []
-        # Iterate over search results in chunks of 25 results
-    count = 0
-    while count < len(data):
-        params = {'start': count, 'count': 25}
-        res = download(url=self.coauthor_link, params=params, accept='json')
-        data = loads(res.text)['search-results'].get('entry', [])
-        # Extract information for each coauthor
-        for entry in data:
-            aff = entry.get('affiliation-current', {})
-            try:
-                areas = [a['$'] for a in entry.get('subject-area', [])]
-            except TypeError:  # Only one subject area given
-                areas = [entry['subject-area']['$']]
-            new = coauth(surname=entry['preferred-name']['surname'],
-                         given_name=entry['preferred-name'].get('given-name'),
-                         id=entry['dc:identifier'].split(':')[-1],
-                         areas='; '.join(areas),
-                         affiliation_id=aff.get('affiliation-id'),
-                         name=aff.get('affiliation-name'),
-                         city=aff.get('affiliation-city'),
-                         country=aff.get('affiliation-country'))
-            coauthors.append(new)
-        count += 25
+    coauthors = pd.DataFrame.from_records(data)
+    coauthors.columns = ['name', 'scopus_id', 'affiliation', 'categories']
+   
     return coauthors
