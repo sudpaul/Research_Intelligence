@@ -32,8 +32,8 @@ def orcid_scopusid(ORCID):
     
     scopus_id : str
                 author SCOPUS ID   
-    Raises: str
-            'Not Found'
+    Raises: int
+            0 for faild http request
     """
     import requests
         
@@ -56,4 +56,5 @@ def orcid_scopusid(ORCID):
         return scopus_id
         
     except:
-        return 'Not Found'
+        #If http request faild
+        return 0
