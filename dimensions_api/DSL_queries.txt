@@ -1,0 +1,12 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Jan 18 12:38:22 2019
+
+@author: z3525552
+"""
+# publications identified by doi 
+search publications
+       where  doi = "10.1016/j.jalz.2014.03.007"       
+       and year in [2013:2015] and type = "article"
+    
+       return publications[year+author_affiliations+FOR]
