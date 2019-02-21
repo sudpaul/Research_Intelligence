@@ -6,7 +6,7 @@ Created on Mon Jan 14 12:22:08 2019
 """
 
 
-def orcid_scopusid(ORCID):
+def orcid_scopusid(orcid):
     
     """
     Input is researher ORCID and retrive
@@ -39,7 +39,7 @@ def orcid_scopusid(ORCID):
         
     with open('../elsevier_developer') as f:
             token = f.read().strip()    
-    base_url ='https://api.elsevier.com/content/author/orcid/{orcid}'.format(orcid=ORCID)
+    base_url =f'https://api.elsevier.com/content/author/orcid/{orcid}'
         
     header = {'Accept':'application/json', 'X-ELS-APIKey': token}
         
@@ -51,6 +51,7 @@ def orcid_scopusid(ORCID):
            return response.status_code
     
         response_data = response.json()       
+        
         result = response_data['author-retrieval-response'][0]['coredata']                      
         _, scopus_id = result['dc:identifier'].split(':')
         return scopus_id
