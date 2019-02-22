@@ -22,8 +22,8 @@ def eid_authorid(eid):
         # Get authors of the abstracts
         
     data = response["abstracts-retrieval-response"]["authors"]["author"]
-    scopus_id = [author['@auid'] for author in data]
+    auth_id = {author['ce:surname']:author['@auid'] for author in data}
      
        
-    return scopus_id
+    return auth_id
 
