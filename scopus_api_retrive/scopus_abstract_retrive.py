@@ -7,7 +7,6 @@ Created on Thu Feb 21 13:13:28 2019
 #Abstract search from Scopus
 
 import requests
-import pandas as pd
 
 def eid_authorid(eid):     
     
@@ -27,3 +26,4 @@ def eid_authorid(eid):
        
     return auth_id
 
+#To do generalise abstract retrive to get funding agency from dois/eids/pubmed_id
