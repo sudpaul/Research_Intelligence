@@ -9,29 +9,17 @@ Created on Thu Feb 21 13:13:28 2019
 import requests
 
 
-
-def publication_retrive(eid):
-    
-    #with open('../elsevier_developer') as f:
-               # token = f.read().strip()    
+def eid_authorid(eid):     
+    with open('../elsevier_developer') as f:
+         token = f.read().strip()    
     base_url =f'https://api.elsevier.com/content/abstract/eid/{eid}'
             
-    header = {'Accept':'application/json', 'X-ELS-APIKey': 'cf19ff27ef3c0d95f93c26947eb6533f'}
+    header = {'Accept':'application/json', 'X-ELS-APIKey': token}
     res = requests.get(url=base_url, headers=header)
     
-    response = res.json() 
-        
-    return response
-
-
-
-
-
-def eid_authorid(eid):     
-    
-    res_obj = publication_retrive(eid)
-    # Get authors of the abstracts    
-    data = res_obj["abstracts-retrieval-response"]["authors"]["author"]
+    # Get authors of the abstracts
+    response = res.json()     
+    data = response["abstracts-retrieval-response"]["authors"]["author"]
     auth_id = {author['ce:surname']:author['@auid'] for author in data}
      
        
@@ -42,11 +30,15 @@ def eid_authorid(eid):
 
 def eid_grants(eid):
     
-    res_obj = publication_retrive(eid)
-    funding = res_obj["abstracts-retrieval-response"]["item"]["xocs:meta"]["xocs:funding-list"]["xocs:funding"]
+    with open('../elsevier_developer') as f:
+         token = f.read().strip()
+    base_url =f'https://api.elsevier.com/content/abstract/eid/{eid}'
+            
+    header = {'Accept':'application/json', 'X-ELS-APIKey': token}
+    res = requests.get(url=base_url, headers=header)
+    response = res.json() 
+    funding = response["abstracts-retrieval-response"]["item"]["xocs:meta"]["xocs:funding-list"]["xocs:funding"]
     
-    grants = {}
-    for fund in funding:
-        grants[fund["xocs:funding-id"]]= fund["xocs:funding-agency"]
+    grants = {fund["xocs:funding-id"]: fund["xocs:funding-agency"] for fund in funding}
     
     return grants
