@@ -14,6 +14,9 @@ Created on Thu Jan 31 13:06:50 2019
 
 
 # Generalise the new theme mapping
+#Cross theme mapping keyword
+
+#Genetics, Molecular Biology, Molecular Medicine
 
 def check_theme(subjects):
     
