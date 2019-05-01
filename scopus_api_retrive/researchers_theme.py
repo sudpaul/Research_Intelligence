@@ -5,13 +5,6 @@ Created on Thu Jan 31 13:06:50 2019
 @author: z3525552
 """
 
-# New ASJC codes to mapped NCD theme --- Discusses with Research Manager 
-#2706      Medicine             Critical Care and Intensive Care Medicine
-#2715      Medicine             Gastroenterology
-#2720      Medicine             Hematology
-#2727      Medicine             Nephrology
-#2732      Medicine             Orthopedics and Sports Medicine
-
 
 # Generalise the new theme mapping
 #Cross theme mapping keyword
@@ -48,7 +41,9 @@ def check_theme(subjects):
             'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
             'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology',
             'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
-            'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine'}
+            'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine',
+            'Critical Care and Intensive Care Medicine', 'Gastroenterology', 'Hematology','Nephrology',
+            'Orthopedics and Sports Medicine'}
     
         
     theme_dict = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'} ,
@@ -61,7 +56,9 @@ def check_theme(subjects):
                    'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
                    'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'},
                    'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
-                        'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine'}}    
+                        'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine',
+                        'Critical Care and Intensive Care Medicine', 'Gastroenterology', 'Hematology','Nephrology',
+                        'Orthopedics and Sports Medicine'}}    
     #Filter the author publication subjects ASJC codes to UNSW med theme ASJC listed codes
     theme_subjects = {key:value for key, value in subjects.items() if key in data_set}
     #If ASJC codes are matched then mapped to the data dictionary of theme Subjects
