@@ -17,3 +17,8 @@ search publications
 search grants where (start_year in [2010:2017] and funders.acronym="NHMRC")
            return funders[name + acronym + country_name]
            return active_year aggregate funding
+           
+           
+search publications 
+where year>=2013 and year<=2015 and funders.acronym="NHMRC"
+return publications
