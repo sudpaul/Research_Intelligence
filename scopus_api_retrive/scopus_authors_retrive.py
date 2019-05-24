@@ -20,10 +20,10 @@ def scopus_author(scopus_id):
     
     assert isinstance(scopus_id, (str, int))
     
-    from scopus import ScopusAuthor
+    from scopus import AuthorRetrieval
     
     # Retrive autor object from SCOPUS database
-    author = ScopusAuthor(scopus_id)
+    author = AuthorRetrieval(scopus_id)
     
     return author
 
@@ -58,14 +58,15 @@ def make_dataframe(authors_scopus_ids):
        scopus_id['SCOPUS_ID'].append(author)
        #Retriving author from SCOPUS
        au = scopus_author(author)    
-       
+       firstname, surname = au.given_name, au.surname
+       author = firstname + ' ' + surname
        #Retriving attributies from author 
-       scopus_id['name'].append(au.name)
-       scopus_id['h_index'].append(au.hindex)
-       scopus_id['documents_total'].append(au.ndocuments)
-       scopus_id['number_first_author'].append(au.n_first_author_papers(refresh=False))
-       scopus_id['number_last_author'].append(au.n_last_author_papers(refresh=False))
-       scopus_id['total_citing_papers'].append(au.ncited_by)
+       scopus_id['name'].append(author)
+       scopus_id['h_index'].append(au.h_index)
+       scopus_id['documents_total'].append(au.document_count)
+       #scopus_id['number_first_author'].append(au.n_first_author_papers(refresh=False))
+       #scopus_id['number_last_author'].append(au.n_last_author_papers(refresh=False))
+       scopus_id['total_citing_papers'].append(au.cited_by_count)
       
        
        scopus_id['orcid'].append(au.orcid)
