@@ -8,7 +8,18 @@ Upgrade scopus from 0.8 to 1.6 deprecated support ScopusAuthor and
 introduction of new class AuthorRetieval
 """
 def get_subject_docs(identifier):
-    """Returns (subject area, number of documents)-tuples."""
+    
+    """
+    Parameter
+    ----------
+    identifier : str or int
+    
+    Returns
+    ----------
+    
+    publication: dict
+                subject area dict key and value number of documents.
+    """
     
     from scopus_authors_retrive import scopus_author
     from operator import itemgetter
