@@ -40,7 +40,7 @@ def make_dataframe(authors_scopus_ids):
     ----------
     scopus_ids : list or tuple 
     
-    Return
+    Returns
     ----------
     df : Pandas dataframe'''  
     
