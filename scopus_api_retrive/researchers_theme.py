@@ -4,8 +4,6 @@ Created on Thu Jan 31 13:06:50 2019
 
 @author: z3525552
 """
-
-
 # Generalise the new theme mapping
 #Cross theme mapping keyword
 
@@ -106,22 +104,25 @@ def researcher_theme(SCOPUS_ID):
      
     Parameter
     ----------
-    scopus_ids : list or tuple 
-                 Author Scopus IDs  
+    SCOPUS_ID :  str or int
+                 Author Scopus ID  
     Return
     ----------
-    df        : Obj
-                Pandas dataframe''' 
+    result, main: tuple
+                Publication mapping and theme mapping''' 
     
     #Retriving author from SCOPUS
-    from scopus import ScopusAuthor
-    
+    from scopus import AuthorRetrieval
+    from operator import itemgetter
     # Retrive autor object from SCOPUS database
-    au = ScopusAuthor(SCOPUS_ID)
+    au = AuthorRetrieval(SCOPUS_ID)
+    docs = dict(au.classificationgroup)
+    names = [(publication.area, int(docs[publication.code])) for publication in au.subject_areas]
+    names.sort(reverse=True, key=itemgetter(1))
     
-    subjects = dict(au.categories)
+    publications = dict(names)    
     
-    research_area, result = check_theme(subjects)
+    research_area, result = check_theme(publications)
     main, secondary_area = theme_key(result)
     if main: 
        alternative, all_areas = theme_key(secondary_area)
