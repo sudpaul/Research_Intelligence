@@ -4,6 +4,11 @@ Created on Mon Oct  8 10:54:44 2018
 
 @author: z3525552
 """
+from author_subjects import get_subject_docs
+
+publications = get_subject_docs(identifier=6603573607)
+subjects = publications.keys()
+
 def check_theme(theme_subject):
     
     """Helper function which can help to identify scopus subject catgories set is
@@ -47,12 +52,11 @@ def check_theme(theme_subject):
 
 
 def main_theme(subjects):
-    
     """This is a custom function to map Scopus author subject categories to 
-    pre-defined theme
+      pre-defined theme
     Parameters
     ----------
-    subjects : tuple
+    subjects : list
               Scopus author subject categories
     Returns
     ----------
@@ -68,7 +72,7 @@ def main_theme(subjects):
          'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
              'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
              'Rheumatology', 'Toxicology'},
-         'NMHgitA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
+         'NMHA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
                    'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
                    'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
                    'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
