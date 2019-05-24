@@ -1,4 +1,5 @@
 scopus
+numpy
 pandas
 collections
 requests
