@@ -20,35 +20,10 @@ def author_publication(scopus_id):
     journal : obj
               pandas dataframe object         
     """
-       
-
     researcher = scopus_author(scopus_id)
-    journals = pd.DataFrame(researcher.publication_history) 
-    journals.columns = ['sourcetitle','abbreviation','publication_type','issn']
-
+    journals = pd.DataFrame(researcher.journal_history) 
+    
     return journals      
-
-
-def publication_subjects(scopus_id):
-        
-    """Retriving Journal publication detail from Scopus 
-    input scopus_id for which  return publication history
-   
-    Parameter
-    ----------
-    scopus_id : str
-               Author Scopus id
-    subjects : obj
-              pandas dataframe object         
-    """
-    
-    researcher = scopus_author(scopus_id)
-    
-    subjects = pd.DataFrame(data=researcher.subject_areas)
-    subjects.columns = ['subjects','n_documents','subject_categories','asjc_codes']
-    subjects = subjects.sort_values(by=['n_documents'], ascending=False)
-    
-    return subjects
 
 def get_coauthors(scopus_id):
     """Retrieves basic information about co-authors as a list of
