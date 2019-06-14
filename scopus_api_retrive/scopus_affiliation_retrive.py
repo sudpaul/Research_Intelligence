@@ -23,10 +23,10 @@ def scopus_affiliation(affiliation_id):
     
     assert isinstance(affiliation_id, (str, int))
     
-    from scopus import ScopusAffiliation
+    from scopus import ContentAffiliationRetrieval
     
     # Retrive Affiliation object from SCOPUS database
-    affiliation = ScopusAffiliation(affiliation_id) 
-    print(affiliation) 
+    affiliation = ContentAffiliationRetrieval(affiliation_id) 
+    print(affiliation.affiliation_name) 
     
     return affiliation
