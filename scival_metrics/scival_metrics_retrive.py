@@ -41,8 +41,10 @@ def scival_metrics(scopus_id):
     #Making a pandas dataframe from data dictionary
     df = pd.DataFrame.from_records(response_data)
     
+    # Publication metrics are CiteScore Percentile default of SciVal metrics
+    
     metrics = df[['metricType', 'value']]
-    metrics = metrics.fillna(0.0)
+    #metrics = metrics.fillna(0.0)
     metrics = metrics.set_index('metricType')
     
     return metrics
