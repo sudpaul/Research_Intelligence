@@ -44,6 +44,8 @@ def scival_SJR_percentile_retrive(author_id):
     
     #Dataframe from the SJR percentile data dictionary            
     df = pd.DataFrame.from_dict(data)    
+    # Get the publication percentile from the data frmae 
+    # If the nubmer is needed change dataframe column name to value
     top_10_percentile = df.iloc[2]['percentage']
                 
     return top_10_percentile
