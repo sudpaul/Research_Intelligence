@@ -104,7 +104,7 @@ def author_subject_area(SCOPUS_IDs):
     
     import pandas as pd
     from collections import defaultdict
-    from operator import itemgetter
+    from operator import itemgetter 
     
     assert isinstance(SCOPUS_IDs,(list, tuple))
     
