@@ -7,7 +7,7 @@ Created on Mon Feb 25 11:35:52 2019
 import pandas as pd
 import numpy as np
 import requests
-from scopus_authors_retrive import scopus_author
+from scopus import AuthorRetrieval
 
 publication = pd.read_excel('data/UNSW SPHERE data SWSR CRM 20180726 v3.xlsx', sheet_name='Publications', encoding='utf-8')
 missing_scopus = pd.read_csv('data/medicine_missing_scopus-ids.csv')
@@ -22,8 +22,8 @@ data['publication_score'] = 0.0
 
 def eid_authorid(eid):     
     
-    with open('../elsevier_developer') as f:
-                token = f.read().strip()    
+    #with open('../elsevier_developer') as f:
+    token =  'cf19ff27ef3c0d95f93c26947eb6533f'   
     base_url =f'https://api.elsevier.com/content/abstract/eid/{eid}'
             
     header = {'Accept':'application/json', 'X-ELS-APIKey': token}
@@ -51,13 +51,14 @@ for author, _ in df.groupby('CONTACT_SURNAME'):
         researchers = eid_authorid(row['eids'][0])
         author_scopus_id = researchers[row['Author']]
         #Call Scopus Author API and get pbulications EIDs match to authors
-        au = scopus_author(author_scopus_id)
+        au = AuthorRetrieval(author_scopus_id)
     
     
         #Retrive all publications of the retive author
         pubs = au.get_document_eids()
     #Get the subset which match to SCOPUS database and Central publication repos
-        match_publications = set(pubs).intersection(row['eids'])
+        papers = set(pubs)
+        match_publications = papers.intersection(row['eids'])
     
     #Validation scores for the authors
         match_score = len(match_publications)/len(row['eids'])
