@@ -22,8 +22,8 @@ data['publication_score'] = 0.0
 
 def eid_authorid(eid):     
     
-    #with open('../elsevier_developer') as f:
-    token =  'cf19ff27ef3c0d95f93c26947eb6533f'   
+    with open('../elsevier_developer') as f:
+         token =  f.read().strip()   
     base_url =f'https://api.elsevier.com/content/abstract/eid/{eid}'
             
     header = {'Accept':'application/json', 'X-ELS-APIKey': token}
