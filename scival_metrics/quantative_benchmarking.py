@@ -4,6 +4,10 @@ Created on Fri Jul 12 11:16:39 2019
 
 @author: z3525552
 """
+import pandas as pd
+from scival_author_metrics import api_query
+from collections import defaultdict
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
 
 def benchmarking_metrics(scopus_id):
@@ -23,14 +27,9 @@ def benchmarking_metrics(scopus_id):
               pandas dataframe metricType as index
               value as column"""
     
-    import pandas as pd
-    from scival_author_metrics import api_query
-    pd.set_option('display.float_format', lambda x: '%.3f' % x)
-
-    assert isinstance(scopus_id, (str, int))
+   
     query = {'metricTypes': """ScholarlyOutput,CitationCount,
-             FieldWeightedCitationImpact,
-		         OutputsInTopCitationPercentiles,PublicationsInTopJournalPercentiles""",
+             FieldWeightedCitationImpact""",
 		        'byYear': 'false',
 		        'yearRange': '5yrsAndCurrent',
             'includedDocs':'ArticlesReviews',
@@ -38,17 +37,51 @@ def benchmarking_metrics(scopus_id):
             'authors': '%s' %(scopus_id)}  
 
     response = api_query(query)    
-
-
-    response_data = response['results'][0]['metrics']       
-    
-    df = pd.DataFrame.from_records(response_data)
-    
-    # Publication metrics are CiteScore Percentile default of SciVal metrics
-    
-    metrics = df[['metricType', 'value']]
-    #metrics = metrics.fillna(0.0)
+    response_data = response['results'][0]['metrics']
+    metrics = pd.DataFrame.from_records(response_data)
     metrics = metrics.set_index('metricType')
     
-    return metrics
+    return response_data
     
+def articles_metrics(scopus_id, metric='PublicationsInTopJournalPercentiles'):
+    
+    query = {'metricTypes':'%s'%(metric),
+            'yearRange':'5yrsAndCurrent',
+            'includeSelfCitations':'false',
+            'byYear':'false',
+            'includedDocs':'ArticlesReviews',
+            'journalImpactType':'SJR',
+            'showAsFieldWeighted':'false',
+            'indexType':'hIndex',
+            'authors':'%s' %(scopus_id)}
+    
+    response = api_query(query)
+    data = response['results'][0]['metrics'][0]['values']
+    if metric== 'PublicationsInTopJournalPercentiles':
+       return data[-1]['value']  
+
+    else: 
+        return data[2]['value'] 
+
+
+
+def scival_authors(scopus_ids):
+
+    author = defaultdict(list)
+    
+    for au in scopus_ids:
+        author['Scopus_Id'].append(au)
+        benchmark = benchmarking_metrics(au)
+        author['ScholarlyOutput'].append(benchmark.loc['ScholarlyOutput'])
+        author['CitationCount'].append(benchmark.loc['CitationCount'])
+        author['FieldWeightedCitationImpact'].append(benchmark.loc['FieldWeightedCitationImpact'])
+        
+        sjr_pubs = articles_metrics(au)
+        author['SJR_Q1_Publications'].append(sjr_pubs) 
+    
+        top_pubs = articles_metrics(au,metric='OutputsInTopCitationPercentiles')
+        author['Top10_Publication_Output'].append(top_pubs)
+    
+    df = pd.DataFrame.from_dict(author)
+    
+    return df
