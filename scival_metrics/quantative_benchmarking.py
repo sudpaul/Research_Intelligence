@@ -38,11 +38,11 @@ def benchmarking_metrics(scopus_id):
 
     response = api_query(query)    
     response_data = response['results'][0]['metrics']
-    metrics = pd.DataFrame.from_records(response_data)
-    metrics = metrics.set_index('metricType')
+    metrics = {data['metricType']: data['value'] for data in response_data}
     
-    return response_data
     
+    return metrics
+
 def articles_metrics(scopus_id, metric='PublicationsInTopJournalPercentiles'):
     
     query = {'metricTypes':'%s'%(metric),
@@ -72,9 +72,9 @@ def scival_authors(scopus_ids):
     for au in scopus_ids:
         author['Scopus_Id'].append(au)
         benchmark = benchmarking_metrics(au)
-        author['ScholarlyOutput'].append(benchmark.loc['ScholarlyOutput'])
-        author['CitationCount'].append(benchmark.loc['CitationCount'])
-        author['FieldWeightedCitationImpact'].append(benchmark.loc['FieldWeightedCitationImpact'])
+        author['ScholarlyOutput'].append(benchmark['ScholarlyOutput'])
+        author['CitationCount'].append(benchmark['CitationCount'])
+        author['FieldWeightedCitationImpact'].append(benchmark['FieldWeightedCitationImpact'])
         
         sjr_pubs = articles_metrics(au)
         author['SJR_Q1_Publications'].append(sjr_pubs) 
