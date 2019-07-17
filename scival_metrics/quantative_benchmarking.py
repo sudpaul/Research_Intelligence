@@ -32,8 +32,8 @@ def benchmarking_metrics(scopus_id):
              FieldWeightedCitationImpact""",
 		        'byYear': 'false',
 		        'yearRange': '5yrsAndCurrent',
-            'includedDocs':'ArticlesReviews',
-            'journalImpactType':'SJR',
+            'includedDocs':'ArticlesOnly',
+            'journalImpactType':'CiteScore',
             'authors': '%s' %(scopus_id)}  
 
     response = api_query(query)    
@@ -47,20 +47,32 @@ def articles_metrics(scopus_id, metric='PublicationsInTopJournalPercentiles'):
     
     query = {'metricTypes':'%s'%(metric),
             'yearRange':'5yrsAndCurrent',
-            'includeSelfCitations':'false',
+            'includeSelfCitations':'true',
             'byYear':'false',
-            'includedDocs':'ArticlesReviews',
+            'includedDocs':'ArticlesOnly',
             'journalImpactType':'SJR',
-            'showAsFieldWeighted':'false',
+            'showAsFieldWeighted':'true',
             'indexType':'hIndex',
             'authors':'%s' %(scopus_id)}
     
-    response = api_query(query)
-    data = response['results'][0]['metrics'][0]['values']
     if metric== 'PublicationsInTopJournalPercentiles':
+       response = api_query(query)
+       data = response['results'][0]['metrics'][0]['values']
        return data[-1]['value']  
 
     else: 
+        
+        query = {'metricTypes':'%s'%(metric),
+            'yearRange':'5yrsAndCurrent',
+            'includeSelfCitations':'true',
+            'byYear':'false',
+            'includedDocs':'ArticlesOnly',
+            'journalImpactType':'CiteScore',
+            'showAsFieldWeighted':'true',
+            'indexType':'hIndex',
+            'authors':'%s' %(scopus_id)}
+        response = api_query(query)
+        data = response['results'][0]['metrics'][0]['values']
         return data[2]['value'] 
 
 
