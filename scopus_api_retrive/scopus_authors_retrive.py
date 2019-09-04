@@ -64,11 +64,14 @@ def make_dataframe(authors_scopus_ids):
        scopus_id['name'].append(author)
        scopus_id['h_index'].append(au.h_index)
        scopus_id['documents_total'].append(au.document_count)
-       #scopus_id['number_first_author'].append(au.n_first_author_papers(refresh=False))
-       #scopus_id['number_last_author'].append(au.n_last_author_papers(refresh=False))
-       scopus_id['total_citing_papers'].append(au.cited_by_count)
-      
+       eids = pd.DataFrame(au.get_documents())
+       articles = eids[eids['aggregationType'] == 'Journal']
+       n_first = articles[articles['author_ids'].str.startswith(author)]
+       n_last = articles[articles['author_ids'].str.endswith(author)]
        
+       scopus_id['number_of_journal_first_author'] = n_first
+       scopus_id['number_of_journal_last_author'] = n_last
+       scopus_id['total_citing_papers'].append(au.cited_by_count)  
        scopus_id['orcid'].append(au.orcid)
    #Making dataframe for further analysis    
    df = pd.DataFrame.from_dict(scopus_id)
