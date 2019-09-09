@@ -69,8 +69,8 @@ def make_dataframe(authors_scopus_ids):
        n_first = articles[articles['author_ids'].str.startswith(author)]
        n_last = articles[articles['author_ids'].str.endswith(author)]
        
-       scopus_id['number_of_journal_first_author'] = n_first
-       scopus_id['number_of_journal_last_author'] = n_last
+       scopus_id['number_of_journal_first_author'] = len(n_first)
+       scopus_id['number_of_journal_last_author'] = len(n_last)
        scopus_id['total_citing_papers'].append(au.cited_by_count)  
        scopus_id['orcid'].append(au.orcid)
    #Making dataframe for further analysis    
