@@ -9,6 +9,22 @@ from scopus import AuthorRetrieval
 
 def journal_numberof_first_last_authorship(author_id):
 
+    '''Input is author scopus id and get all publications 
+     from Scopus database. Filter the journal publications and
+     return the number of first, last authorship of the researcher
+     
+    Parameter
+    ----------
+    author_id : int or str 
+                Scopus id of Author 
+    
+    Returns
+    ----------
+    first, last : obj                
+               pandas dataframe object  
+               number of first and last author in journals    
+    ''' 
+    
     author = str(author_id)
     au = AuthorRetrieval(author_id)
     eids = pd.DataFrame(au.get_documents())
@@ -16,4 +32,4 @@ def journal_numberof_first_last_authorship(author_id):
     first = articles[articles['author_ids'].str.startswith(author)]
     last = articles[articles['author_ids'].str.endswith(author)]
     
-    return first, last
+    return (first, last)
