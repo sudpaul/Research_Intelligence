@@ -3,8 +3,12 @@
 Created on Wed Nov 14 09:14:07 2018
 
 @author: z3525552
+
 """
-from scopus_authors_retrive import scopus_author
+import pandas as pd
+from pybliometrics.scopus import AuthorRetrieval
+from collections import defaultdict
+from operator import itemgetter
 
 def check_theme(subjects):
     
@@ -23,8 +27,6 @@ def check_theme(subjects):
     result : dict 
              aggregate result of the theme mapping       
     """ 
-    
-    from collections import defaultdict
     result = defaultdict(int)
     
     data_set = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)',
@@ -102,10 +104,7 @@ def author_subject_area(SCOPUS_IDs):
     df        : Obj
                 Pandas dataframe''' 
     
-    import pandas as pd
-    from collections import defaultdict
-    from operator import itemgetter 
-    
+   
     assert isinstance(SCOPUS_IDs,(list, tuple))
     
     scopus_id = defaultdict(list)
@@ -113,7 +112,7 @@ def author_subject_area(SCOPUS_IDs):
     for author in SCOPUS_IDs:
         scopus_id['SCOPUS_ID'].append(author)
        #Retriving author from SCOPUS
-        au = scopus_author(author)
+        au = AuthorRetrieval(author)
         docs = dict(au.classificationgroup)
     #Retrive the names and number of publication from author subject areas
         names = [(publication.area, int(docs[publication.code])) for publication in au.subject_areas]
