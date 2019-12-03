@@ -7,7 +7,7 @@ Created on Mon Feb 25 11:35:52 2019
 import numpy as np
 import pandas as pd
 import requests
-from scopus import AuthorRetrieval
+from pybliometrics.scopus import AuthorRetrieval
 
 publication = pd.read_excel('data/UNSW SPHERE data SWSR CRM 20180726 v3.xlsx', sheet_name='Publications', encoding='utf-8')
 missing_scopus = pd.read_csv('data/medicine_missing_scopus-ids.csv')
