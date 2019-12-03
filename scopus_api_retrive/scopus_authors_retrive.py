@@ -20,7 +20,7 @@ def scopus_author(scopus_id):
     
     assert isinstance(scopus_id, (str, int))
     
-    from scopus import AuthorRetrieval
+    from pybliometrics.scopus import AuthorRetrieval
     
     # Retrive autor object from SCOPUS database
     author = AuthorRetrieval(scopus_id)
