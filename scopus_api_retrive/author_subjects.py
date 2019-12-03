@@ -7,6 +7,9 @@ Created on Thu May 23 12:52:38 2019
 Upgrade scopus from 0.8 to 1.6 deprecated support ScopusAuthor and
 introduction of new class AuthorRetieval
 """
+
+from pybliometrics.scopus import AuthorRetrieval
+from operator import itemgetter
 def get_subject_docs(identifier):
     
     """
@@ -21,10 +24,8 @@ def get_subject_docs(identifier):
                 subject area dict key and value number of documents.
     """
     
-    from scopus_authors_retrive import scopus_author
-    from operator import itemgetter
     
-    author = scopus_author(identifier)
+    author = AuthorRetrieval(identifier)
     # publication number mapping to ASJC code dictionary
     docs = dict(author.classificationgroup)
     #Retrive the names and number of publication from author subject areas

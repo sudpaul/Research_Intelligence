@@ -6,9 +6,6 @@ Created on Mon Oct  8 10:54:44 2018
 """
 from author_subjects import get_subject_docs
 
-publications = get_subject_docs(identifier=6603573607)
-subjects = publications.keys()
-
 def check_theme(theme_subject):
     
     """Helper function which can help to identify scopus subject catgories set is
