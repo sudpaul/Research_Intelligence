@@ -9,6 +9,10 @@ Created on Thu Jan 31 13:06:50 2019
 
 #Genetics, Molecular Biology, Molecular Medicine
 
+from pybliometrics.scopus import AuthorRetrieval
+from operator import itemgetter
+from collections import defaultdict
+
 def check_theme(subjects):
     
     """The function input is SCOPUS author subjects area and it maps to medicine
@@ -27,7 +31,7 @@ def check_theme(subjects):
              aggregate result of the theme mapping       
     """ 
     
-    from collections import defaultdict
+     
     result = defaultdict(int)
     
     data_set = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)',
@@ -112,8 +116,7 @@ def researcher_theme(SCOPUS_ID):
                 Publication mapping and theme mapping''' 
     
     #Retriving author from SCOPUS
-    from scopus import AuthorRetrieval
-    from operator import itemgetter
+    
     # Retrive autor object from SCOPUS database
     au = AuthorRetrieval(SCOPUS_ID)
     docs = dict(au.classificationgroup)
