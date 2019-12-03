@@ -4,8 +4,8 @@ Created on Mon Feb 25 11:35:52 2019
 
 @author: z3525552
 """
-import pandas as pd
 import numpy as np
+import pandas as pd
 import requests
 from scopus import AuthorRetrieval
 
