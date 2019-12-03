@@ -4,6 +4,9 @@ Created on Mon Jul 30 09:35:35 2018
 
 @author: Sudipta Paul
 """
+import pandas as pd
+from collections import defaultdict
+from pybliometrics.scopus import AuthorRetrieval
 
 def scopus_author(scopus_id):
     
@@ -20,7 +23,7 @@ def scopus_author(scopus_id):
     
     assert isinstance(scopus_id, (str, int))
     
-    from pybliometrics.scopus import AuthorRetrieval
+    
     
     # Retrive autor object from SCOPUS database
     author = AuthorRetrieval(scopus_id)
@@ -46,8 +49,6 @@ def make_dataframe(authors_scopus_ids):
     
    assert isinstance(authors_scopus_ids,(list, tuple)) 
     
-   import pandas as pd
-   from collections import defaultdict
    
    #Default dictionary of Scopus ID for author attributes lookup
    scopus_id = defaultdict(list)
