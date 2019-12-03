@@ -55,7 +55,7 @@ for author, _ in df.groupby('CONTACT_SURNAME'):
     
     
         #Retrive all publications of the retive author
-        pubs = au.get_document_eids()
+        pubs = au.get_document_eids(refresh=False, cursor=False)
     #Get the subset which match to SCOPUS database and Central publication repos
         papers = set(pubs)
         match_publications = papers.intersection(row['eids'])

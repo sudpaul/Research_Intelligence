@@ -5,7 +5,7 @@ Created on Wed Sep  4 12:44:57 2019
 @author: z3525552
 """
 import pandas as pd
-from scopus import AuthorRetrieval
+from pybliometrics.scopus import AuthorRetrieval
 
 def journal_numberof_first_last_authorship(author_id):
 
@@ -24,10 +24,11 @@ def journal_numberof_first_last_authorship(author_id):
                pandas dataframe object  
                number of first and last author in journals    
     ''' 
-    
-    author = str(author_id)
+    assert isinstance(author_id, (str, int))
+    if type(author_id)!= str:
+        author = str(author_id)
     au = AuthorRetrieval(author_id)
-    eids = pd.DataFrame(au.get_documents())
+    eids = pd.DataFrame(au.get_documents(refresh=False, cursor=False))
     articles = eids[eids['aggregationType'] == 'Journal']
     first = articles[articles['author_ids'].str.startswith(author)]
     last = articles[articles['author_ids'].str.endswith(author)]
