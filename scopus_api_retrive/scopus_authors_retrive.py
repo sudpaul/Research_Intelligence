@@ -20,11 +20,8 @@ def scopus_author(scopus_id):
     Return
     ----------
     author : Scopus Author object'''
-    
     assert isinstance(scopus_id, (str, int))
-    
-    
-    
+       
     # Retrive autor object from SCOPUS database
     author = AuthorRetrieval(scopus_id)
     
@@ -48,8 +45,6 @@ def make_dataframe(authors_scopus_ids):
     df : Pandas dataframe'''  
     
    assert isinstance(authors_scopus_ids,(list, tuple)) 
-    
-   
    #Default dictionary of Scopus ID for author attributes lookup
    scopus_id = defaultdict(list)
   
@@ -65,7 +60,7 @@ def make_dataframe(authors_scopus_ids):
        scopus_id['name'].append(author)
        scopus_id['h_index'].append(au.h_index)
        scopus_id['documents_total'].append(au.document_count)
-       eids = pd.DataFrame(au.get_documents())
+       eids = pd.DataFrame(au.get_document_eids(refresh=False, cursor=False))
        articles = eids[eids['aggregationType'] == 'Journal']
        n_first = articles[articles['author_ids'].str.startswith(author)]
        n_last = articles[articles['author_ids'].str.endswith(author)]
