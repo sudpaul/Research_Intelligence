@@ -4,6 +4,11 @@ Created on Tue Oct  2 10:51:59 2018
 
 @author: z3525552
 """
+import pandas as pd
+from pybliometrics.scopus import AuthorRetrieval
+from collections import defaultdict
+from apply_theme import main_theme
+    
 def author_subject_area(SCOPUS_IDs):
     
     """The function is to retrive bulk subject categories of SCOPUS author. 
@@ -20,18 +25,12 @@ def author_subject_area(SCOPUS_IDs):
     
     assert isinstance(SCOPUS_IDs, (list, tuple))
 
-    
-    import pandas as pd
-    from scopus_authors_retrive import scopus_author
-    from collections import defaultdict
-    from apply_theme import main_theme
-    
     scopus_id = defaultdict(list)
   
     for author in SCOPUS_IDs:
         scopus_id['SCOPUS_ID'].append(author)
        #Retriving author from SCOPUS
-        au = scopus_author(author)
+        au = AuthorRetrieval(author)
         subjects, documents = zip(*au.categories)
         primary_theme, result = main_theme(subjects)
         scopus_id['Name'].append(au.name)      
