@@ -4,34 +4,17 @@ Created on Mon Aug 27 12:19:44 2018
 
 @author: z3525552
 """
-import pytest
-import scopus_authors_retrive 
+import warnings
+import unittest
+from pybliometrics.scopus import AuthorRetrieval
 
-spec = """
-       scopus_id : '7005082840'
-       columns: 
-       - "SCOPUS_ID"
-       - "name"
-       - "h_index"
-       - "documents_total"
-       - "total_citing_papers"
-       - "orcid"
-       """
-      
+warnings.simplefilter("always")
 
-def check_schema(df, meta_columns):
-    
-    for col in df.columns:
-        assert col in meta_columns, f'"{col}" not in metadata column spec'
-    
+class TestScopusAuthor(unittest.TestCase):
 
-def test_scopus_author():
-    
-    import yaml
-    
-    
-    df = scopus_authors_retrive.make_dataframe(['7005082840'])
-    
-    metadata = yaml.load(spec)
+    def test_author(self):
+        self.assertEqual(AuthorRetrieval('7005789553', refresh=True).given_name, 'Sean')
 
-    check_schema(df, metadata)
+
+if __name__ == '__main__':
+    unittest.main()
