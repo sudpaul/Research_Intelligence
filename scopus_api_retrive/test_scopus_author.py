@@ -14,6 +14,9 @@ class TestScopusAuthor(unittest.TestCase):
 
     def test_author(self):
         self.assertEqual(AuthorRetrieval('7005789553', refresh=True).given_name, 'Sean')
+    
+    def test_date_created(self):
+        self.assertEqual(AuthorRetrieval('7005789553').date_created, (2005, 12, 3))
 
 
 if __name__ == '__main__':
