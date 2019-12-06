@@ -1,4 +1,4 @@
-scopus
+pybliometrics
 numpy
 pandas
 collections
