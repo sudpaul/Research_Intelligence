@@ -54,8 +54,7 @@ def make_dataframe(authors_scopus_ids):
        scopus_id['SCOPUS_ID'].append(author)
        #Retriving author from SCOPUS
        au = scopus_author(author)    
-       firstname, surname = au.given_name, au.surname
-       author = firstname + ' ' + surname
+       author = au.given_name + ' ' + au.surname
        #Retriving attributies from author 
        scopus_id['name'].append(author)
        scopus_id['h_index'].append(au.h_index)
