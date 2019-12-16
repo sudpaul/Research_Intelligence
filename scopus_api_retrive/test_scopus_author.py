@@ -17,7 +17,13 @@ class TestScopusAuthor(unittest.TestCase):
     
     def test_date_created(self):
         self.assertEqual(AuthorRetrieval('7005789553').date_created, (2005, 12, 3))
-
+    
+    def test_orcid(self):
+        self.assertEqual(AuthorRetrieval('7005789553').orcid, '0000-0001-6072-8309')
+    
+    def test_publication_range(self):
+        self.assertEqual(AuthorRetrieval('7005789553').publication_range[0], '1985')
+        self.assertTrue(int(AuthorRetrieval('7005789553').publication_range[1]) >= 2018)
 
 if __name__ == '__main__':
     unittest.main()
