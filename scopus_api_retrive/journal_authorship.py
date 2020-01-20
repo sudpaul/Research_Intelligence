@@ -27,10 +27,12 @@ def journal_numberof_first_last_authorship(author_id):
     assert isinstance(author_id, (str, int))
     if type(author_id)!= str:
         author = str(author_id)
+    else:
+        author = author_id
     au = AuthorRetrieval(author_id)
-    eids = pd.DataFrame(au.get_documents(refresh=False, cursor=False))
-    articles = eids[eids['aggregationType'] == 'Journal']
+    publications = pd.DataFrame(au.get_documents(refresh=False))
+    articles = publications[publications['aggregationType'] == 'Journal']
     first = articles[articles['author_ids'].str.startswith(author)]
     last = articles[articles['author_ids'].str.endswith(author)]
-    
-    return (first, last)
+    n_first, n_last = len(first), len(last)
+    return (n_first, n_last)
