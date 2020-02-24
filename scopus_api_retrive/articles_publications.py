@@ -36,8 +36,8 @@ def author_publication(author_id):
     journal_publications = publications[publications['aggregationType'] == 'Journal']
     first = journal_publications[journal_publications['author_ids'].str.startswith(author)]
     last = journal_publications[journal_publications['author_ids'].str.endswith(author)]
-    articles = pd.concat([first, last])
-    articles['year'] = articles['coverDate'].str[:4]
     
+    first['year'] = first['coverDate'].str[:4]
+    last['year'] = last['coverDate'].str[:4]
     
-    return articles
+    return first, last
