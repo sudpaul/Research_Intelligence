@@ -19,10 +19,10 @@ def scopus_author(scopus_id):
     
     assert isinstance(scopus_id, (str, int))
     
-    from scopus import ScopusAuthor
+    from pybliometrics.scopus import AuthorRetrieval
     
     # Retrive autor object from SCOPUS database
-    author = ScopusAuthor(scopus_id)
+    author = AuthorRetrieval(scopus_id)
     
     return author
 
@@ -133,6 +133,7 @@ def author_subject_area(SCOPUS_IDs):
     
     import pandas as pd
     from collections import defaultdict
+    from operator import itemgetter
     
     assert isinstance(SCOPUS_IDs,(list, tuple))
     
@@ -142,9 +143,14 @@ def author_subject_area(SCOPUS_IDs):
         scopus_id['SCOPUS_ID'].append(author)
        #Retriving author from SCOPUS
         au = scopus_author(author)
-        subjects = dict(au.categories)
-        research_area, result = check_theme(subjects)
-        scopus_id['Name'].append(au.name)      
+        docs = dict(au.classificationgroup)
+        #Retrive the names and number of publication from author subject areas
+        names = [(publication.area, int(docs[publication.code])) for publication in au.subject_areas]
+        # sort the data key publication count
+        names.sort(reverse=True, key=itemgetter(1))
+        publications = dict(names) 
+        research_area, result = check_theme(publications)
+        scopus_id['Name'].append(au.given_name)      
         scopus_id['Subjects_area'].append(research_area)
         scopus_id['Result'].append(result)
         main, secondary_area = theme_key(result)
