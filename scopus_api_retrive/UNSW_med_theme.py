@@ -3,12 +3,29 @@
 Created on Wed Nov 14 09:14:07 2018
 
 @author: z3525552
-
 """
-import pandas as pd
-from pybliometrics.scopus import AuthorRetrieval
-from collections import defaultdict
-from operator import itemgetter
+def scopus_author(scopus_id):
+    
+    '''Helper function to invoke the Scopus Author from SCOPUS database
+     download the author contents and return author object
+    
+    Parameter
+    ----------
+    scopus_id : str or int
+    
+    Return
+    ----------
+    author : Scopus Author object'''
+    
+    assert isinstance(scopus_id, (str, int))
+    
+    from scopus import ScopusAuthor
+    
+    # Retrive autor object from SCOPUS database
+    author = ScopusAuthor(scopus_id)
+    
+    return author
+
 
 def check_theme(subjects):
     
@@ -27,22 +44,28 @@ def check_theme(subjects):
     result : dict 
              aggregate result of the theme mapping       
     """ 
+    
+    from collections import defaultdict
     result = defaultdict(int)
     
     data_set = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)',
-            'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
+            'Endocrinology','General Immunology and Microbiology','Immunology and Microbiology (miscellaneous)',
+            'Immunology', 'Microbiology','Immunology and Allergy', 'Microbiology (medical)',
             'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
             'Rheumatology', 'Toxicology', 'Clinical Neurology','Psychiatry and Mental Health', 
             'General Neuroscience', 'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
             'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
             'Developmental Neuroscience', 'Neurology' ,'Psychiatry Mental Health','Psychology (miscellaneous)',
             'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology',
-            'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
-            'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine'}
+            'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine', 'Critical Care and Intensive Care Medicine',
+            'Emergency Medicine','Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine','Epidemiology','Family Practice',
+            'Gastroenterology','Health Informatics','Health Policy','Hematology','Hepatology', 'Internal Medicine','Nephrology', 'Ophthalmology',
+            'Orthopedics and Sports Medicine', 'Otorhinolaryngology', 'Transplantation','Urology', 'Critical Care','Respiratory Care'}
     
         
     theme_dict = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'} ,
-                  'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
+                  'Triple I' : {'Endocrinology','General Immunology and Microbiology','Immunology and Microbiology (miscellaneous)',
+                                'Immunology', 'Microbiology','Immunology and Allergy', 'Microbiology (medical)',
                   'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
                   'Rheumatology', 'Toxicology'},            
                    'NMHA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
@@ -50,8 +73,12 @@ def check_theme(subjects):
                    'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
                    'Developmental Neuroscience', 'Neurology' ,'Psychiatry Mental Health','Psychology (miscellaneous)',
                    'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'},
-                   'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
-                        'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine'}}    
+                   'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine', 
+                            'Critical Care and Intensive Care Medicine', 'Emergency Medicine','Endocrinology, Diabetes and Metabolism',
+                            'Pulmonary and Respiratory Medicine','Epidemiology','Family Practice', 'Gastroenterology',
+                            'Health Informatics','Health Policy','Hematology','Hepatology', 'Internal Medicine','Nephrology', 
+                            'Ophthalmology', 'Orthopedics and Sports Medicine', 'Otorhinolaryngology', 'Transplantation','Urology', 
+                            'Critical Care','Respiratory Care'}}    
     #Filter the author publication subjects ASJC codes to UNSW med theme ASJC listed codes
     theme_subjects = {key:value for key, value in subjects.items() if key in data_set}
     #If ASJC codes are matched then mapped to the data dictionary of theme Subjects
@@ -104,7 +131,9 @@ def author_subject_area(SCOPUS_IDs):
     df        : Obj
                 Pandas dataframe''' 
     
-   
+    import pandas as pd
+    from collections import defaultdict
+    
     assert isinstance(SCOPUS_IDs,(list, tuple))
     
     scopus_id = defaultdict(list)
@@ -112,18 +141,10 @@ def author_subject_area(SCOPUS_IDs):
     for author in SCOPUS_IDs:
         scopus_id['SCOPUS_ID'].append(author)
        #Retriving author from SCOPUS
-        au = AuthorRetrieval(author)
-        docs = dict(au.classificationgroup)
-    #Retrive the names and number of publication from author subject areas
-        names = [(publication.area, int(docs[publication.code])) for publication in au.subject_areas]
-      
-    # sort the data key publication count
-        names.sort(reverse=True, key=itemgetter(1))
-    
-        publications = dict(names)    
-        research_area, result = check_theme(publications)
-        scopus_id['First_name'].append(au.given_name)
-        scopus_id['Last_name'].append(au.surname)
+        au = scopus_author(author)
+        subjects = dict(au.categories)
+        research_area, result = check_theme(subjects)
+        scopus_id['Name'].append(au.name)      
         scopus_id['Subjects_area'].append(research_area)
         scopus_id['Result'].append(result)
         main, secondary_area = theme_key(result)
