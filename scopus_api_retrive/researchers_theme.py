@@ -34,33 +34,56 @@ def check_theme(subjects):
      
     result = defaultdict(int)
     
-    data_set = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)',
-            'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
-            'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
-            'Rheumatology', 'Toxicology', 'Clinical Neurology','Psychiatry and Mental Health', 
-            'General Neuroscience', 'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
-            'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
-            'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
-            'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology',
-            'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
-            'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine',
-            'Critical Care and Intensive Care Medicine', 'Gastroenterology', 'Hematology','Nephrology',
-            'Orthopedics and Sports Medicine'}
+    data_set = {'Cancer Research','Oncology', 'Cancer', 'Radiation', 
+                'Oncology(nursing)', 'Endocrinology',
+                'General Immunology and Microbiology',
+                'Immunology and Microbiology (miscellaneous)',
+            'Immunology', 'Microbiology','Immunology and Allergy', 
+            'Microbiology (medical)', 'Parasitology', 'Virology', 'Dermatology',
+            'Allergy', 'Infectious Diseases', 'Rheumatology', 'Toxicology', 
+            'Clinical Neurology','Psychiatry and Mental Health','General Neuroscience', 
+            'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
+            'Biological Psychiatry','Cellular and Molecular Neuroscience',
+            'Cognitive Neuroscience',
+            'Developmental Neuroscience', 'Neurology' ,'Psychiatry Mental Health',
+            'Psychology (miscellaneous)',
+            'Experimental and Cognitive Psychology', 
+            'Neuropsychology and Physiological Psychology',
+            'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine', 
+            'Critical Care and Intensive Care Medicine',
+            'Emergency Medicine','Endocrinology, Diabetes and Metabolism',
+            'Pulmonary and Respiratory Medicine','Epidemiology','Family Practice',
+            'Gastroenterology','Health Informatics','Health Policy','Hematology','Hepatology',
+            'Internal Medicine','Nephrology', 'Ophthalmology', 'Orthopedics and Sports Medicine', 
+            'Otorhinolaryngology', 'Transplantation','Urology', 'Critical Care','Respiratory Care'}
+    
     
         
-    theme_dict = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 'Oncology(nursing)'} ,
-                  'Triple I' : {'Endocrinology','Immunology and Microbiology','Immunology', 'Microbiology',
-                  'Parasitology', 'Virology', 'Dermatology', 'Allergy', 'Infectious Diseases',
-                  'Rheumatology', 'Toxicology'},            
-                   'NMHA' : {'Clinical Neurology','Psychiatry and Mental Health', 'General Neuroscience',
-                   'Neuroscience (miscellaneous)' , 'Behavioral Neuroscience', 
-                   'Biological Psychiatry','Cellular and Molecular Neuroscience','Cognitive Neuroscience',
-                   'Developmental Neuroscience', 'Neurology' ,'Phychiatric Mental Health','Psychology (miscellaneous)',
-                   'Experimental and Cognitive Psychology', 'Neuropsychology and Physiological Psychology'},
-                   'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine',
-                        'Endocrinology, Diabetes and Metabolism','Pulmonary and Respiratory Medicine',
-                        'Critical Care and Intensive Care Medicine', 'Gastroenterology', 'Hematology','Nephrology',
-                        'Orthopedics and Sports Medicine'}}    
+    theme_dict = {'Cancer' : {'Cancer Research','Oncology', 'Cancer', 'Radiation', 
+                              'Oncology(nursing)'} ,
+                  'Triple I' : {'Endocrinology','General Immunology and Microbiology',
+                                'Immunology and Microbiology (miscellaneous)',
+                                'Immunology', 'Microbiology','Immunology and Allergy', 
+                                'Microbiology (medical)','Parasitology', 'Virology', 
+                                'Dermatology', 'Allergy', 'Infectious Diseases',
+                                'Rheumatology', 'Toxicology'},            
+                   'NMHA' : {'Clinical Neurology','Psychiatry and Mental Health', 
+                             'General Neuroscience','Neuroscience (miscellaneous)' , 
+                             'Behavioral Neuroscience', 'Biological Psychiatry',
+                             'Cellular and Molecular Neuroscience','Cognitive Neuroscience',
+                             'Developmental Neuroscience', 'Neurology' ,'Psychiatry Mental Health',
+                             'Psychology (miscellaneous)', 'Experimental and Cognitive Psychology', 
+                             'Neuropsychology and Physiological Psychology'},
+                             
+                   'NCD' : {'Cardiology', 'Cardiovascular Medicine','Cardiology and Cardiovascular Medicine', 
+                            'Critical Care and Intensive Care Medicine', 'Emergency Medicine',
+                            'Endocrinology, Diabetes and Metabolism', 'Pulmonary and Respiratory Medicine',
+                            'Epidemiology','Family Practice', 'Gastroenterology',
+                            'Health Informatics','Health Policy','Hematology','Hepatology', 
+                            'Internal Medicine','Nephrology', 'Ophthalmology', 
+                            'Orthopedics and Sports Medicine', 'Otorhinolaryngology', 
+                            'Transplantation','Urology', 'Critical Care','Respiratory Care'}}
+                   
     #Filter the author publication subjects ASJC codes to UNSW med theme ASJC listed codes
     theme_subjects = {key:value for key, value in subjects.items() if key in data_set}
     #If ASJC codes are matched then mapped to the data dictionary of theme Subjects
