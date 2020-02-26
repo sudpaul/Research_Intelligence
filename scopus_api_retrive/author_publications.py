@@ -39,6 +39,6 @@ def get_coauthors(scopus_id):
     data = res.get_coauthors()
         
     coauthors = pd.DataFrame.from_records(data)
-    coauthors.columns = ['name', 'scopus_id', 'affiliation', 'categories']
+    
    
     return coauthors
