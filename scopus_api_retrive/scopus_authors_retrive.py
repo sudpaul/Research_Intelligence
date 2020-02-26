@@ -59,7 +59,7 @@ def make_dataframe(authors_scopus_ids):
        scopus_id['name'].append(author)
        scopus_id['h_index'].append(au.h_index)
        scopus_id['documents_total'].append(au.document_count)
-       eids = pd.DataFrame(au.get_document_eids(refresh=False, cursor=False))
+       eids = pd.DataFrame(au.get_document())
        articles = eids[eids['aggregationType'] == 'Journal']
        n_first = articles[articles['author_ids'].str.startswith(author)]
        n_last = articles[articles['author_ids'].str.endswith(author)]
