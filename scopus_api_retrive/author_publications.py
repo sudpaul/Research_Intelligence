@@ -37,8 +37,6 @@ def get_coauthors(scopus_id):
         # Get number of authors to search for
     res = scopus_author(scopus_id)
     data = res.get_coauthors()
-        
-    coauthors = pd.DataFrame.from_records(data)
-    
-   
+    coauthors = pd.DataFrame(data)
+       
     return coauthors
