@@ -40,7 +40,7 @@ def eid_authorid(eid):
 
 
 for author, _ in df.groupby('CONTACT_SURNAME'):
-    researcher = df.loc[(df['CONTACT_SURNAME']==author)&(df['TYPE']=='Journal article')]
+    researcher = df.loc[(df['CONTACT_SURNAME']==author)]
     eids = researcher['SCOPUS_ID'].tolist()
     scopus_eids = [str(eid) for eid in eids if eid is not np.nan]
     row = {'Author': author, 'eids': scopus_eids}
