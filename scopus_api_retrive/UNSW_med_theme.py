@@ -161,8 +161,8 @@ def author_subject_area(SCOPUS_IDs):
         else:
             scopus_id['Main_theme'].append("All/Any")
             scopus_id['Alternative_theme'].append("All_any themes")
-    ## Add columns for each 'Theme' and tranfrom subjects to match 'Theme'   
+    ## Add columns for each 'Theme' and transfrom subjects to match 'Theme'   
        
-    df = pd.DataFrame.from_dict(scopus_id)
+    dataframe = pd.DataFrame.from_dict(scopus_id)
     
-    return df
+    return dataframe
